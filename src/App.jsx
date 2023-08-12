@@ -1,14 +1,30 @@
-import { useState } from 'react'
+import {useState, useEffect} from 'react'
 import './App.css'
+import GameComponents from './components/GameComponents'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [display, setDisplay] = useState(true)
+    const [game, setGame] = useState(null)
 
-  return (
-    <>
-       
-    </>
-  )
+    useEffect(() => {
+        if (!display) {
+            setGame(() => <GameComponents/>)
+        }
+    }, [display])
+
+    return (
+        <div className="App">
+            <div className="startButton-holder">
+                {
+                display ? <button onClick={
+                    () => {
+                        setDisplay(false)
+                    }
+                }>Start!</button> : null
+            } </div>
+            <div>{game}</div>
+        </div>
+    )
 }
 
 export default App
